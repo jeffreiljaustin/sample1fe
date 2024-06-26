@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int year = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +27,19 @@ class Home extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                CircleAvatar(
-                  child: Image.asset('assets/user.png'),
-                  radius: 50.0,
+                Center(
+                  child: CircleAvatar(
+                    child: Image.asset('assets/user.png'),
+                    radius: 65.0,
+                  ),
                 ),
-                Divider(height: 55.0,),
+                Divider(height: 55.0, color: Colors.yellow, thickness: 5.00,),
                 Row(
                   children: [
-                    Icon(Icons.person_2),
+                    Icon(
+                      Icons.person_2,
+                      color: Colors.yellow[500],
+                    ),
                     SizedBox(width: 3,),
                     Text(
                       'NAME',
@@ -47,15 +59,24 @@ class Home extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 30.0,),
-                Text(
-                  'YEAR',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    letterSpacing: 2.0,
-                  ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.calendar_month,
+                      color: Colors.yellow[500],
+                    ),
+                    SizedBox(width: 3,),
+                    Text(
+                      'YEAR',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        letterSpacing: 2.0,
+                      ),
+                    ),
+                  ],
                 ),
                 Text(
-                  'Third',
+                  '$year Year',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
@@ -63,12 +84,21 @@ class Home extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 30.0,),
-                Text(
-                  'EMAIL',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    letterSpacing: 2.0,
-                  ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.person_2,
+                      color: Colors.yellow[500],
+                    ),
+                    SizedBox(width: 3,),
+                    Text(
+                      'EMAIL',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        letterSpacing: 2.0,
+                      ),
+                    ),
+                  ],
                 ),
                 Text(
                   'jeffreilbelarmino@gmail.com',
@@ -84,7 +114,11 @@ class Home extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 ElevatedButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      setState(() {
+                        year +=1;
+                      });
+                    },
                     child: Text('Add Year'),
                   style: ButtonStyle(
                     backgroundColor: WidgetStateProperty.all(Colors.yellow[400]),

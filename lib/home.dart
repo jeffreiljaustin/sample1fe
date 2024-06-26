@@ -101,7 +101,7 @@ class _HomeState extends State<Home> {
                   ],
                 ),
                 Text(
-                  'jeffreilbelarmino@gmail.com',
+                  '21-10898@g.batstate-u-edu.ph',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,

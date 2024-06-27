@@ -18,25 +18,7 @@ class _MenuState extends State<Menu> {
     Product(productName: "Maki 'Dilaw' Photocard Set", price: 399.99),
   ];
 
-  Widget cardTemplate(product){
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Text(
-            product.productName,
-            style: TextStyle(
-            fontSize:20.0,
-          ),
-          ),
-          Text('${product.price}'),
-        ],
-      )
-    ),
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {

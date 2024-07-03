@@ -18,8 +18,8 @@ class _DashboardState extends State<Dashboard> {
         centerTitle: true,
       ),
       body: Container(
-        child: SafeArea(
-          child: Column(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
                   onPressed: (){
@@ -36,7 +36,6 @@ class _DashboardState extends State<Dashboard> {
             ],
           ),
         ),
-      )
     );
   }
 }

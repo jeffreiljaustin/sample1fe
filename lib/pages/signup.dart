@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:sample/services/user.dart';
+import 'package:http/http.dart' as http;
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -12,6 +16,23 @@ class _SignupState extends State<Signup> {
   String name = '';
   String email = '';
   String password = '';
+  bool _obscure = true;
+  IconData _obscureIcon = Icons.visibility_off;
+
+  createAccount(User user) async{
+    final response = await http.post(
+      Uri.parse('http://10.0.2.2:8080/api/v1/auth/register/user'),
+      headers : <String, String>{
+        'Content-Type' : 'application/json; charter=UTF-8'
+      },
+      body: jsonEncode(<String, dynamic>{
+        'username' : user.username,
+        'email' : user.email,
+        'password' : user.password
+      }),
+    );
+    print(response.body);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +45,7 @@ class _SignupState extends State<Signup> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Lets Get Started!',
+                'Create Account',
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   letterSpacing: 1.0,
@@ -38,9 +59,11 @@ class _SignupState extends State<Signup> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     TextFormField(
-                      maxLength: 40,
                       decoration: InputDecoration(
                       label: Text('Name'),
+                          filled: true,
+                          fillColor: Colors.white,
+                          prefixIcon: Icon(Icons.person),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0)
                         )
@@ -63,6 +86,9 @@ class _SignupState extends State<Signup> {
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         label: Text('Email'),
+                          filled: true,
+                          fillColor: Colors.white,
+                          prefixIcon: Icon(Icons.email),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0)
                         ),
@@ -79,9 +105,27 @@ class _SignupState extends State<Signup> {
                     ),
                     SizedBox(height: 20.0,),
                     TextFormField(
+                        maxLength: 20,
                         obscureText: true,
                         decoration: InputDecoration(
                             label: Text('Password'),
+                              filled: true,
+                              fillColor: Colors.white,
+                          prefixIcon: Icon(Icons.lock_rounded),
+                          suffixIcon: IconButton(
+                            icon: Icon(_obscureIcon),
+                            onPressed: (){
+                              setState(() {
+                                _obscure = !_obscure;
+                                if(_obscure){
+                                  _obscureIcon = Icons.visibility_off;
+                                }else{
+                                  _obscureIcon = Icons.visibility;
+                                }
+                              }
+                              );
+                            },
+                          ),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0)
                             ),
@@ -151,3 +195,4 @@ class _SignupState extends State<Signup> {
     );
   }
 }
+

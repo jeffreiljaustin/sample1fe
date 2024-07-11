@@ -9,6 +9,7 @@ class Menucard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.yellow[300],
       child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
@@ -20,7 +21,9 @@ class Menucard extends StatelessWidget {
                   fontSize:20.0,
                 ),
               ),
-              Text('${product.price}'),
+              Text('${product.price}',
+                style: TextStyle(color: Colors.black),
+              ),
             ],
           )
       ),
